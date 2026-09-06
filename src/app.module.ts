@@ -10,8 +10,6 @@ import { FileModule } from './lib/file/file.module';
 import { BullModule } from '@nestjs/bullmq';
 import { ConfigService } from '@nestjs/config';
 import { AuthModule } from './modules/auth/auth.module';
-import { PostModule } from './modules/post/post.module';
-import { InteractionsModule } from './modules/interactions/interactions.module';
 import { QueuesModule } from './common/queues/queues.module';
 import { LoggerModule } from './common/logger/logger.module';
 
@@ -34,8 +32,6 @@ import { LoggerModule } from './common/logger/logger.module';
     LoggerModule,
     AuthModule,
     QueuesModule,
-    PostModule,
-    InteractionsModule,
   ],
   controllers: [AppController],
   providers: [AppService, AtStrategy],

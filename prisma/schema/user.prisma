@@ -18,16 +18,10 @@ model User {
     verificationToken VerificationToken[]
 
     // Relations
-    posts        Post[]
-    comments     Comment[]
-    postLikes    PostLike[]
-    commentLikes CommentLike[]
 }
 
 enum UserRole {
     USER
-    SUPPORTER
-    ADMIN
     SUPER_ADMIN
 }
 
