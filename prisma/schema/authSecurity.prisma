@@ -1,0 +1,12 @@
+model AuthSecurity {
+    id                 String    @id @default(cuid())
+    userId             String    @unique
+    user               User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+    hasPassword        Boolean   @default(true)
+    failedAttempts     Int       @default(0)
+    lastFailedAt       DateTime?
+    lockExpiresAt      DateTime?
+    lastLoginIp        String?
+    lastLoginAt        DateTime?
+    lastPasswordChange DateTime?
+}

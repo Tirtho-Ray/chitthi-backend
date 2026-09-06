@@ -1,0 +1,39 @@
+model User {
+    id       String @id @default(cuid())
+    publicId String @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid // exposed in API/URLs
+
+    name          String?
+    email         String     @unique
+    password      String?
+    emailVerified DateTime?
+    status        UserStatus @default(PENDING)
+    role          UserRole   @default(USER)
+    tokenVersion  Int        @default(0)
+    createdAt     DateTime   @default(now())
+    updatedAt     DateTime   @updatedAt
+
+    refreshToken      RefreshToken[]
+    sessions          Session[]
+    authSecurity      AuthSecurity?
+    verificationToken VerificationToken[]
+
+    // Relations
+    posts        Post[]
+    comments     Comment[]
+    postLikes    PostLike[]
+    commentLikes CommentLike[]
+}
+
+enum UserRole {
+    USER
+    SUPPORTER
+    ADMIN
+    SUPER_ADMIN
+}
+
+enum UserStatus {
+    PENDING
+    ACTIVE
+    SUSPENDED
+    DELETED
+}

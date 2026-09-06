@@ -1,0 +1,31 @@
+model RefreshToken {
+    id     String @id @default(cuid())
+    userId String
+    user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    // Security & Identity
+    tokenHash String @unique
+    jti       String @unique
+    family    String?
+
+    // Rotation Tracking
+    rotatedFromId String?
+    replacedById  String?
+
+    // Client Info
+    deviceId  String?
+    ipAddress String?
+    userAgent String?
+
+    // Revocation Logic
+    isRevoked    Boolean   @default(false)
+    revokedAt    DateTime?
+    revokeReason String?
+
+    expiresAt DateTime
+    createdAt DateTime @default(now())
+
+    @@unique([userId, deviceId])
+    @@index([userId])
+    @@index([userId, deviceId])
+}

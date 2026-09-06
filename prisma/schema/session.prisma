@@ -1,0 +1,17 @@
+model Session {
+    id         String   @id @default(cuid())
+    userId     String
+    user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    deviceId   String
+    sid        String   @unique // latest jti
+    deviceName String?
+    ipAddress  String?
+    userAgent  String?
+    isActive   Boolean  @default(true)
+    expiresAt  DateTime
+    lastUsedAt DateTime @default(now()) @updatedAt
+    createdAt  DateTime @default(now())
+
+    @@unique([userId, deviceId])
+    @@index([userId])
+}
